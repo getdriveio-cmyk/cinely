@@ -1,12 +1,4 @@
-// Use hardcoded paths to match built assets
-const poster1 = "/dist/assets/poster-1-09MI7_5e.jpg";
-const poster2 = "/dist/assets/poster-2-D3KWPSpU.jpg";
-const poster3 = "/dist/assets/poster-3-r1X99Uqi.jpg";
-const poster4 = "/dist/assets/poster-4-DplWFywa.jpg";
-const poster5 = "/dist/assets/poster-5-CGFcUoxB.jpg";
-const poster6 = "/dist/assets/poster-6-CwBqk9Ys.jpg";
-// Use public path for Numb poster
-const numbPoster = "/dist/assets/images.png";
+import { poster1, poster2, poster3, poster4, poster5, poster6, numbPoster, mykeWrightPoster } from '@/utils/imagePaths';
 
 export interface Movie {
   id: string;
@@ -101,7 +93,7 @@ export const mockMovies: Movie[] = [
     year: 2024,
     duration: 90,
     genre: ["Comedy", "Stand-up", "Sci-Fi"],
-    poster: "/dist/assets/undefined_turn_this_into_a_mov.png",
+    poster: mykeWrightPoster,
     isAdFree: true,
     synopsis: "Join comedian Myke Wright on an out-of-this-world comedy adventure! In this hilarious stand-up special filmed in zero gravity, Myke delivers his signature wit and observational humor while floating through space. From alien encounters to the challenges of performing in a spacesuit, this comedy special takes laughter to new heights - literally!"
   }
