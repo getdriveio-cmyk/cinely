@@ -25,12 +25,8 @@ const Header = () => {
     navigate('/');
   };
 
-  const handleSignIn = async () => {
-    try {
-      await signIn(); // Call Auth0 signIn
-    } catch (error) {
-      console.error('Sign in error:', error);
-    }
+  const handleSignIn = () => {
+    navigate('/login');
   };
 
   return (

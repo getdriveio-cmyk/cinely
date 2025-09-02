@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
 
 interface User {
   id: string
@@ -41,91 +40,67 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const { 
-    user: auth0User, 
-    loginWithRedirect, 
-    logout, 
-    isLoading: auth0Loading,
-    isAuthenticated
-  } = useAuth0()
-  
   const [user, setUser] = useState<User | null>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
+  // Check for existing session on mount
   useEffect(() => {
-    if (auth0User && isAuthenticated) {
-      // Convert Auth0 user to our User interface
-      const convertedUser: User = {
-        id: auth0User.sub || '',
-        name: auth0User.name || auth0User.email || 'User',
-        email: auth0User.email || '',
-        image: auth0User.picture,
-      }
-      
-      // Check if we have saved profile data
-      const session = localStorage.getItem('cinely_session')
-      let savedProfile: UserProfile | null = null
-      
-      if (session) {
-        try {
-          const sessionData = JSON.parse(session)
-          if (sessionData.profile && sessionData.profile.userId === convertedUser.id) {
-            savedProfile = sessionData.profile
-          }
-        } catch (error) {
-          console.error('Error parsing session data:', error)
+    const session = localStorage.getItem('cinely_session')
+    if (session) {
+      try {
+        const sessionData = JSON.parse(session)
+        if (sessionData.user && sessionData.profile) {
+          setUser(sessionData.user)
+          setProfile(sessionData.profile)
         }
+      } catch (error) {
+        console.error('Error parsing session data:', error)
+        localStorage.removeItem('cinely_session')
       }
-      
-      const convertedProfile: UserProfile = savedProfile || {
-        userId: convertedUser.id,
-        displayName: convertedUser.name,
-        avatarUrl: convertedUser.image,
-        country: 'US', // Default country
-        onboardingAt: null // Will trigger onboarding flow
-      }
-      
-      setUser(convertedUser)
-      setProfile(convertedProfile)
-      console.log('Auth0 user signed in:', convertedUser)
-      
-      // Save to localStorage if not already saved
-      if (!savedProfile) {
-        localStorage.setItem('cinely_session', JSON.stringify({
-          user: convertedUser,
-          profile: convertedProfile
-        }))
-      }
-    } else {
-      setUser(null)
-      setProfile(null)
     }
-  }, [auth0User, isAuthenticated])
+  }, [])
 
   const signIn = async () => {
-    try {
-      await loginWithRedirect({
-        authorizationParams: {
-          redirect_uri: window.location.origin,
-          appState: {
-            returnTo: '/dashboard'
-          }
-        },
-      })
-    } catch (error) {
-      console.error('Auth0 login error:', error)
+    setIsLoading(true)
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    // Create mock user
+    const mockUser: User = {
+      id: 'mock-user-123',
+      name: 'Demo User',
+      email: 'demo@cinely.com',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'
     }
+
+    const mockProfile: UserProfile = {
+      userId: mockUser.id,
+      displayName: mockUser.name,
+      avatarUrl: mockUser.image,
+      country: 'US',
+      onboardingAt: null // Will trigger onboarding flow
+    }
+
+    setUser(mockUser)
+    setProfile(mockProfile)
+
+    // Save to localStorage
+    localStorage.setItem('cinely_session', JSON.stringify({
+      user: mockUser,
+      profile: mockProfile
+    }))
+
+    setIsLoading(false)
+    console.log('Mock user signed in:', mockUser)
   }
 
   const signOut = () => {
-    logout({
-      logoutParams: {
-        returnTo: window.location.origin,
-      },
-    })
     setUser(null)
     setProfile(null)
-    console.log('Auth0 user signed out')
+    localStorage.removeItem('cinely_session')
+    console.log('Mock user signed out')
   }
 
   const updateProfile = async (updates: Partial<UserProfile>) => {
@@ -146,8 +121,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const value: AuthContextType = {
     user,
     profile,
-    isLoading: auth0Loading,
-    isAuthenticated,
+    isLoading,
+    isAuthenticated: !!user,
     signIn,
     signOut,
     updateProfile
