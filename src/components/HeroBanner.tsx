@@ -44,6 +44,7 @@ const HeroBanner = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 shadow-hero text-lg px-8 py-3 h-auto"
+              onClick={() => window.location.href = '/watch-free'}
             >
               <Play className="w-5 h-5 mr-2" />
               Start Watching Free

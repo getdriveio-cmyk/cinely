@@ -29,10 +29,10 @@ const Header = () => {
           
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#" className="text-foreground hover:text-primary transition-colors">Home</a>
+            <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Movies</a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">TV Shows</a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Originals</a>
+            <a href="/watch-free" className="text-muted-foreground hover:text-foreground transition-colors">Watch Free</a>
           </nav>
         </div>
 
