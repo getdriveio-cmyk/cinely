@@ -6,6 +6,9 @@
   
   console.log('🔧 Force unregistering service workers...');
   
+  // Force reload the page after cleanup to ensure fresh content
+  let hasReloaded = false;
+  
   if ('serviceWorker' in navigator) {
     // Unregister all service workers
     navigator.serviceWorker.getRegistrations().then(function(registrations) {
@@ -30,6 +33,15 @@
           );
         }).then(function() {
           console.log('✅ All caches cleared');
+          
+          // Force reload the page to ensure fresh content
+          if (!hasReloaded && (registrations.length > 0 || cacheNames.length > 0)) {
+            hasReloaded = true;
+            console.log('🔄 Reloading page to ensure fresh content...');
+            setTimeout(() => {
+              window.location.reload(true);
+            }, 1000);
+          }
         });
       }
     });

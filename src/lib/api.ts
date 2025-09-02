@@ -61,8 +61,8 @@ export const mockTitles: Title[] = [
     title: 'The Dark Knight',
     slug: 'the-dark-knight',
     description: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.',
-    posterUrl: '/src/assets/poster-1.jpg',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    posterUrl: '/dist/assets/poster-1-09MI7_5e.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '2008-07-18',
     durationSec: 9120, // 2h 32m
     genres: ['Action', 'Crime', 'Drama'],
@@ -76,8 +76,8 @@ export const mockTitles: Title[] = [
     title: 'Inception',
     slug: 'inception',
     description: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
-    posterUrl: '/src/assets/poster-2.jpg',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    posterUrl: '/dist/assets/poster-2-D3KWPSpU.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '2010-07-16',
     durationSec: 8880, // 2h 28m
     genres: ['Action', 'Sci-Fi', 'Thriller'],
@@ -91,8 +91,8 @@ export const mockTitles: Title[] = [
     title: 'Interstellar',
     slug: 'interstellar',
     description: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.',
-    posterUrl: '/src/assets/poster-3.jpg',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    posterUrl: '/dist/assets/poster-3-r1X99Uqi.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '2014-11-07',
     durationSec: 10200, // 2h 50m
     genres: ['Adventure', 'Drama', 'Sci-Fi'],
@@ -106,8 +106,8 @@ export const mockTitles: Title[] = [
     title: 'Cinely Original: The Last Stand',
     slug: 'cinely-original-the-last-stand',
     description: 'An exclusive Cinely original series about survival in a post-apocalyptic world.',
-    posterUrl: '/src/assets/poster-4.jpg',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    posterUrl: '/dist/assets/poster-4-DplWFywa.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '2024-01-15',
     durationSec: 3600, // 1h
     genres: ['Drama', 'Thriller', 'Sci-Fi'],
@@ -121,8 +121,8 @@ export const mockTitles: Title[] = [
     title: 'Pulp Fiction',
     slug: 'pulp-fiction',
     description: 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-    posterUrl: '/src/assets/poster-5.jpg',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    posterUrl: '/dist/assets/poster-5-CGFcUoxB.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '1994-10-14',
     durationSec: 9240, // 2h 34m
     genres: ['Crime', 'Drama'],
@@ -136,8 +136,8 @@ export const mockTitles: Title[] = [
     title: 'The Matrix',
     slug: 'the-matrix',
     description: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-    posterUrl: '/src/assets/poster-6.jpg',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    posterUrl: '/dist/assets/poster-6-CwBqk9Ys.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '1999-03-31',
     durationSec: 8160, // 2h 16m
     genres: ['Action', 'Sci-Fi'],
@@ -152,7 +152,7 @@ export const mockTitles: Title[] = [
     slug: 'numb',
     description: 'A gripping psychological thriller that follows a man who loses the ability to feel physical pain after a traumatic accident. As he navigates a world where he can no longer distinguish between safety and danger, he discovers that emotional numbness might be the real curse. This intense character study explores themes of trauma, healing, and the human need for connection in a world that has become increasingly disconnected.',
     posterUrl: '/dist/assets/images.png',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '2024-12-15',
     durationSec: 7200, // 2h
     genres: ['Drama', 'Thriller', 'Psychological'],
@@ -168,7 +168,7 @@ export const mockTitles: Title[] = [
     slug: 'myke-wright-comedy-space',
     description: 'Join comedian Myke Wright on an out-of-this-world comedy adventure! In this hilarious stand-up special filmed in zero gravity, Myke delivers his signature wit and observational humor while floating through space. From alien encounters to the challenges of performing in a spacesuit, this comedy special takes laughter to new heights - literally!',
     posterUrl: '/dist/assets/undefined_turn_this_into_a_mov.png',
-    backdropUrl: '/src/assets/hero-banner.jpg',
+    backdropUrl: '/dist/assets/hero-banner-DBz6Sf7I.jpg',
     releaseDate: '2024-12-20',
     durationSec: 5400, // 1h 30m
     genres: ['Comedy', 'Stand-up', 'Sci-Fi'],
@@ -210,13 +210,13 @@ export const mockDashboardData: DashboardData = {
   watchlist: [
     {
       title: mockTitles[1],
-      posterUrl: '/src/assets/poster-2.jpg',
+      posterUrl: '/dist/assets/poster-2-D3KWPSpU.jpg',
       slug: 'inception',
       durationSec: 8880
     },
     {
       title: mockTitles[3],
-      posterUrl: '/src/assets/poster-4.jpg',
+      posterUrl: '/dist/assets/poster-4-DplWFywa.jpg',
       slug: 'cinely-original-the-last-stand',
       durationSec: 3600
     }
