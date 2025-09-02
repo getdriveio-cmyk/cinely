@@ -161,6 +161,22 @@ export const mockTitles: Title[] = [
     muxAssetId: 'jN1bZ6SUAHG68mGwEknScves3dlQGZ9HADk9sKxGqDA',
     isFree: true,
     isOriginal: true
+  },
+  {
+    id: '8',
+    title: 'Myke Wright does Comedy in Space',
+    slug: 'myke-wright-comedy-space',
+    description: 'Join comedian Myke Wright on an out-of-this-world comedy adventure! In this hilarious stand-up special filmed in zero gravity, Myke delivers his signature wit and observational humor while floating through space. From alien encounters to the challenges of performing in a spacesuit, this comedy special takes laughter to new heights - literally!',
+    posterUrl: '/dist/assets/undefined_turn_this_into_a_mov.png',
+    backdropUrl: '/src/assets/hero-banner.jpg',
+    releaseDate: '2024-12-20',
+    durationSec: 5400, // 1h 30m
+    genres: ['Comedy', 'Stand-up', 'Sci-Fi'],
+    rating: 'PG-13',
+    muxPlaybackId: 'dZ27RgIMjIXYIiF01gmWlh9ERyIrXaUl9mobCBLoinaA',
+    muxAssetId: 'B8yk4B6KVdG2o006XvTA9jzMCngui01Wt8bptTurJA5SY',
+    isFree: true,
+    isOriginal: true
   }
 ]
 
@@ -205,27 +221,38 @@ export const mockDashboardData: DashboardData = {
     {
       title: mockTitles[6], // Numb
       reason: 'popular_in_genre'
+    },
+    {
+      title: mockTitles[7], // Myke Wright Comedy in Space
+      reason: 'new_release'
     }
   ],
-  trending7d: [mockTitles[0], mockTitles[2], mockTitles[4], mockTitles[6]], // Added Numb
-  newlyAdded: [mockTitles[6], mockTitles[3], mockTitles[1]], // Numb as newest
+  trending7d: [mockTitles[0], mockTitles[2], mockTitles[4], mockTitles[6], mockTitles[7]], // Added Numb and Myke Wright
+  newlyAdded: [mockTitles[7], mockTitles[6], mockTitles[3]], // Myke Wright as newest, then Numb
   notifications: [
     {
       id: '1',
+      title: 'New Cinely Original',
+      body: 'Myke Wright does Comedy in Space - A hilarious stand-up special filmed in zero gravity!',
+      href: '/watch/myke-wright-comedy-space',
+      read: false
+    },
+    {
+      id: '2',
       title: 'New Cinely Original',
       body: 'Numb - A gripping psychological thriller is now streaming!',
       href: '/watch/numb',
       read: false
     },
     {
-      id: '2',
+      id: '3',
       title: 'New Release',
       body: 'The Last Stand Season 2 is now available!',
       href: '/watch/cinely-original-the-last-stand',
       read: false
     },
     {
-      id: '3',
+      id: '4',
       title: 'Watchlist Update',
       body: 'Inception is now available to watch',
       href: '/watch/inception',
