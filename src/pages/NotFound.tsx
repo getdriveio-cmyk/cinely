@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
@@ -16,6 +17,13 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Page Not Found - 404 Error"
+        description="The page you're looking for doesn't exist. Return to Cinely's homepage to continue streaming your favorite movies and TV shows."
+        noindex={true}
+        nofollow={true}
+      />
+      
       <Header />
       <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
         <div className="text-center">

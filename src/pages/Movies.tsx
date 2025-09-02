@@ -7,7 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, Filter, Star, Clock, Play, Plus } from "lucide-react";
 import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
+import SEO from "@/components/SEO";
 import { mockMovies } from "@/data/mockMovies";
+import { getCollectionPageStructuredData, getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const Movies = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,8 +44,44 @@ const Movies = () => {
       }
     });
 
+  // SEO structured data
+  const collectionStructuredData = getCollectionPageStructuredData({
+    name: "Movies",
+    description: "Discover thousands of movies across all genres. From blockbusters to indie films, find your next favorite movie.",
+    url: "/movies",
+    numberOfItems: filteredMovies.length,
+    items: filteredMovies.slice(0, 20).map(movie => ({
+      name: movie.title,
+      url: `/movies/${movie.id}`
+    }))
+  });
+
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Movies", url: "/movies" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Movies - Stream Thousands of Films Online"
+        description="Discover thousands of movies across all genres. From blockbusters to indie films, find your next favorite movie. Stream free with ads or upgrade to premium."
+        keywords={[
+          "movies",
+          "streaming movies",
+          "watch movies online",
+          "free movies",
+          "movie streaming",
+          "online cinema",
+          "film streaming",
+          "movie catalog",
+          "new movies",
+          "classic movies"
+        ]}
+        canonical="/movies"
+        structuredData={[collectionStructuredData, breadcrumbStructuredData]}
+      />
+      
       <Header />
       
       {/* Hero Section */}

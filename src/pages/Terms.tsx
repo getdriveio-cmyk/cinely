@@ -3,12 +3,38 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Scale, FileText, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
+import { getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const Terms = () => {
   const lastUpdated = "December 15, 2024";
 
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Terms of Service", url: "/terms" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Terms of Service - Cinely Streaming Platform"
+        description="Read Cinely's terms of service and user agreement. Understand your rights and responsibilities when using our streaming platform."
+        keywords={[
+          "terms of service",
+          "user agreement",
+          "terms and conditions",
+          "legal terms",
+          "service agreement",
+          "user rights",
+          "platform rules",
+          "streaming terms",
+          "legal document",
+          "terms of use"
+        ]}
+        canonical="/terms"
+        structuredData={breadcrumbStructuredData}
+      />
+      
       <Header />
       
       {/* Hero Section */}

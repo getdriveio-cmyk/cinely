@@ -3,12 +3,38 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Eye, Lock, Database, UserCheck, FileText } from "lucide-react";
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
+import { getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const Privacy = () => {
   const lastUpdated = "December 15, 2024";
 
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Privacy Policy", url: "/privacy" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Privacy Policy - How Cinely Protects Your Data"
+        description="Learn how Cinely collects, uses, and protects your personal information. Our privacy policy explains our data practices and your rights."
+        keywords={[
+          "privacy policy",
+          "data protection",
+          "personal information",
+          "privacy rights",
+          "data security",
+          "user privacy",
+          "information collection",
+          "data usage",
+          "privacy practices",
+          "GDPR compliance"
+        ]}
+        canonical="/privacy"
+        structuredData={breadcrumbStructuredData}
+      />
+      
       <Header />
       
       {/* Hero Section */}

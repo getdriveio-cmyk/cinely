@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
+import { getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -79,8 +81,32 @@ const Contact = () => {
     "Press Inquiry"
   ];
 
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Contact", url: "/contact" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Contact Us - Get in Touch with Cinely Support"
+        description="Contact Cinely customer support for help with your account, billing, streaming issues, or general inquiries. We're here to help 24/7."
+        keywords={[
+          "contact us",
+          "customer support",
+          "help desk",
+          "support ticket",
+          "billing support",
+          "technical support",
+          "streaming help",
+          "account help",
+          "customer service",
+          "get help"
+        ]}
+        canonical="/contact"
+        structuredData={breadcrumbStructuredData}
+      />
+      
       <Header />
       
       {/* Hero Section */}

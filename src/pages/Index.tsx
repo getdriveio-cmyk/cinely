@@ -1,11 +1,35 @@
 import Header from "@/components/Header";
 import HeroBanner from "@/components/HeroBanner";
 import MovieRail from "@/components/MovieRail";
+import SEO from "@/components/SEO";
 import { movieRails } from "@/data/mockMovies";
+import { getWebsiteStructuredData, getOrganizationStructuredData } from "@/utils/structuredData";
 
 const Index = () => {
+  const websiteStructuredData = getWebsiteStructuredData();
+  const organizationStructuredData = getOrganizationStructuredData();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Cinely - Your Premium Streaming Destination"
+        description="Stream thousands of movies and shows with Cinely. Watch free with ads or upgrade to our premium ad-free experience. Your cinematic journey starts here."
+        keywords={[
+          "streaming",
+          "movies",
+          "TV shows",
+          "free streaming",
+          "premium streaming",
+          "online movies",
+          "watch movies online",
+          "streaming platform",
+          "cinema",
+          "entertainment"
+        ]}
+        canonical="/"
+        structuredData={[websiteStructuredData, organizationStructuredData]}
+      />
+      
       {/* Header */}
       <Header />
 

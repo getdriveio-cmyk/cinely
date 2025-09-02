@@ -5,7 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Play, Plus, Star, Award, Crown, Sparkles } from "lucide-react";
 import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
+import SEO from "@/components/SEO";
 import { mockMovies } from "@/data/mockMovies";
+import { getCollectionPageStructuredData, getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const Originals = () => {
   // Filter for original content (using a simple filter for demo)
@@ -18,8 +20,43 @@ const Originals = () => {
   const featuredOriginals = originalContent.slice(0, 3);
   const upcomingOriginals = originalContent.slice(3, 6);
 
+  const collectionStructuredData = getCollectionPageStructuredData({
+    name: "Originals",
+    description: "Exclusive Cinely original content you can't find anywhere else. Award-winning series and movies created just for you.",
+    url: "/originals",
+    numberOfItems: originalContent.length,
+    items: originalContent.slice(0, 20).map(movie => ({
+      name: movie.title,
+      url: `/movies/${movie.id}`
+    }))
+  });
+
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Originals", url: "/originals" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Originals - Exclusive Cinely Content"
+        description="Exclusive Cinely original content you can't find anywhere else. Award-winning series and movies created just for you. Stream original shows and films."
+        keywords={[
+          "original content",
+          "exclusive shows",
+          "original movies",
+          "Cinely originals",
+          "exclusive series",
+          "original programming",
+          "award-winning content",
+          "exclusive films",
+          "original entertainment",
+          "streaming originals"
+        ]}
+        canonical="/originals"
+        structuredData={[collectionStructuredData, breadcrumbStructuredData]}
+      />
+      
       <Header />
       
       {/* Hero Section */}

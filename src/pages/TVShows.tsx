@@ -7,7 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, Filter, Star, Clock, Play, Plus, Tv } from "lucide-react";
 import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
+import SEO from "@/components/SEO";
 import { mockMovies } from "@/data/mockMovies";
+import { getCollectionPageStructuredData, getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const TVShows = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,8 +52,44 @@ const TVShows = () => {
       }
     });
 
+  // SEO structured data
+  const collectionStructuredData = getCollectionPageStructuredData({
+    name: "TV Shows",
+    description: "Binge-watch your favorite series and discover new shows. From gripping dramas to hilarious comedies, find your next obsession.",
+    url: "/tv-shows",
+    numberOfItems: filteredShows.length,
+    items: filteredShows.slice(0, 20).map(show => ({
+      name: show.title,
+      url: `/tv-shows/${show.id}`
+    }))
+  });
+
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "TV Shows", url: "/tv-shows" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="TV Shows - Stream Series and Episodes Online"
+        description="Binge-watch your favorite series and discover new shows. From gripping dramas to hilarious comedies, find your next obsession. Stream free with ads or upgrade to premium."
+        keywords={[
+          "TV shows",
+          "streaming TV",
+          "watch TV online",
+          "free TV shows",
+          "TV series",
+          "binge watch",
+          "episodes",
+          "seasons",
+          "drama series",
+          "comedy shows"
+        ]}
+        canonical="/tv-shows"
+        structuredData={[collectionStructuredData, breadcrumbStructuredData]}
+      />
+      
       <Header />
       
       {/* Hero Section */}

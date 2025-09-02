@@ -6,6 +6,8 @@ import { useState } from "react";
 import { mockMovies } from "@/data/mockMovies";
 import MovieCard from "@/components/MovieCard";
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
+import { getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const WatchFree = () => {
   const [email, setEmail] = useState("");
@@ -70,8 +72,32 @@ const WatchFree = () => {
     }
   ];
 
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Watch Free", url: "/watch-free" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Watch Free - Stream Movies & TV Shows Without Subscription"
+        description="Start watching thousands of movies and TV shows completely free with ads. No credit card required. Instant access to premium content on any device."
+        keywords={[
+          "free streaming",
+          "watch free movies",
+          "free TV shows",
+          "no subscription",
+          "free with ads",
+          "streaming free",
+          "watch online free",
+          "free entertainment",
+          "no credit card",
+          "instant access"
+        ]}
+        canonical="/watch-free"
+        structuredData={breadcrumbStructuredData}
+      />
+      
       {/* Header */}
       <Header />
 

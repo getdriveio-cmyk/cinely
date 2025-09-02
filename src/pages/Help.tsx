@@ -6,6 +6,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge";
 import { Search, HelpCircle, MessageCircle, Mail, Phone, Clock, CheckCircle, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
+import { getFAQStructuredData, getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const Help = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -103,8 +105,36 @@ const Help = () => {
     { title: "Feature Requests", href: "/feedback" }
   ];
 
+  // Get all FAQs for structured data
+  const allFAQs = faqCategories.flatMap(category => category.faqs);
+
+  const faqStructuredData = getFAQStructuredData(allFAQs);
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Help", url: "/help" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Help Center - Get Support for Cinely Streaming"
+        description="Find answers to common questions about Cinely streaming service. Get help with account setup, billing, streaming issues, and more. 24/7 customer support available."
+        keywords={[
+          "help center",
+          "customer support",
+          "streaming help",
+          "FAQ",
+          "troubleshooting",
+          "account help",
+          "billing support",
+          "technical support",
+          "streaming issues",
+          "customer service"
+        ]}
+        canonical="/help"
+        structuredData={[faqStructuredData, breadcrumbStructuredData]}
+      />
+      
       <Header />
       
       {/* Hero Section */}

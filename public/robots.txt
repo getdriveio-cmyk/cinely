@@ -12,3 +12,26 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://cinely.vercel.app/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block access to admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow all other content
+Allow: /movies/
+Allow: /tv-shows/
+Allow: /originals/
+Allow: /trending/
+Allow: /watch-free/
+Allow: /help/
+Allow: /contact/
+Allow: /privacy/
+Allow: /terms/

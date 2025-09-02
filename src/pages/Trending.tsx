@@ -6,7 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrendingUp, Flame, Star, Clock, Play, Plus, Eye } from "lucide-react";
 import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
+import SEO from "@/components/SEO";
 import { mockMovies } from "@/data/mockMovies";
+import { getCollectionPageStructuredData, getBreadcrumbStructuredData } from "@/utils/structuredData";
 
 const Trending = () => {
   const [activeTab, setActiveTab] = useState("today");
@@ -30,8 +32,43 @@ const Trending = () => {
     .sort((a, b) => b.year - a.year)
     .slice(0, 6);
 
+  const collectionStructuredData = getCollectionPageStructuredData({
+    name: "Trending",
+    description: "Discover what's trending now in movies and TV shows. See the most popular content everyone is watching.",
+    url: "/trending",
+    numberOfItems: trendingMovies.length,
+    items: trendingMovies.slice(0, 20).map(movie => ({
+      name: movie.title,
+      url: `/movies/${movie.id}`
+    }))
+  });
+
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Trending", url: "/trending" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Trending - What's Popular Now on Cinely"
+        description="Discover what's trending now in movies and TV shows. See the most popular content everyone is watching. Updated daily with the hottest releases."
+        keywords={[
+          "trending movies",
+          "trending TV shows",
+          "popular content",
+          "what's trending",
+          "hot movies",
+          "popular shows",
+          "trending now",
+          "most watched",
+          "viral content",
+          "trending entertainment"
+        ]}
+        canonical="/trending"
+        structuredData={[collectionStructuredData, breadcrumbStructuredData]}
+      />
+      
       <Header />
       
       {/* Hero Section */}
