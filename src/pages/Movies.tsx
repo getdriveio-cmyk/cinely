@@ -10,6 +10,7 @@ import MovieCard from "@/components/MovieCard";
 import SEO from "@/components/SEO";
 import { mockMovies } from "@/data/mockMovies";
 import { getCollectionPageStructuredData, getBreadcrumbStructuredData } from "@/utils/structuredData";
+import { trackSearch, trackUserInteraction } from "@/utils/tracking";
 
 const Movies = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -104,7 +105,12 @@ const Movies = () => {
                   type="text"
                   placeholder="Search movies..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    if (e.target.value.length > 2) {
+                      trackSearch(e.target.value, filteredMovies.length);
+                    }
+                  }}
                   className="pl-12 h-12 text-lg bg-white/10 border-white/20 text-white placeholder:text-white/70"
                 />
               </div>

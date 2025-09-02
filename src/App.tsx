@@ -3,10 +3,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import PageLoader from "@/components/PageLoader";
 import OfflineIndicator from "@/components/OfflineIndicator";
+import CookieBanner from "@/components/CookieBanner";
+import { initializeTracking } from "@/utils/tracking";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -23,13 +25,20 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    // Initialize tracking when app loads
+    initializeTracking();
+  }, []);
+
+  return (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <OfflineIndicator />
+        <CookieBanner />
         <BrowserRouter
           future={{
             v7_startTransition: true,
@@ -56,6 +65,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
-);
+  );
+};
 
 export default App;

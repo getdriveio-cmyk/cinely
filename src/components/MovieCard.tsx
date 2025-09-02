@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Plus, Star } from "lucide-react";
 import { useState } from "react";
 import LazyImage from "./LazyImage";
+import { trackUserInteraction } from "@/utils/tracking";
 
 interface Movie {
   id: string;
@@ -80,11 +81,26 @@ const MovieCard = ({ movie, size = "md" }: MovieCardProps) => {
 
             {/* Actions */}
             <div className="flex gap-2">
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
+              <Button 
+                size="sm" 
+                className="bg-primary hover:bg-primary/90"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackUserInteraction('play_movie', movie.title, movie.id);
+                }}
+              >
                 <Play className="w-3 h-3 mr-1" />
                 Play
               </Button>
-              <Button size="sm" variant="outline" className="border-white/30 hover:border-white text-white">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="border-white/30 hover:border-white text-white"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackUserInteraction('add_to_list', movie.title, movie.id);
+                }}
+              >
                 <Plus className="w-3 h-3" />
               </Button>
             </div>

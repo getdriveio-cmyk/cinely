@@ -11,6 +11,13 @@ interface SEOProps {
   structuredData?: object;
   noindex?: boolean;
   nofollow?: boolean;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  section?: string;
+  tags?: string[];
+  locale?: string;
+  alternateLocales?: string[];
 }
 
 const SEO = ({
@@ -18,12 +25,19 @@ const SEO = ({
   description,
   keywords = [],
   canonical,
-  ogImage = "https://cinely.vercel.app/og-image.jpg",
+  ogImage = "https://cinely.vercel.app/og-image.svg",
   ogType = "website",
   twitterCard = "summary_large_image",
   structuredData,
   noindex = false,
-  nofollow = false
+  nofollow = false,
+  author = "Cinely",
+  publishedTime,
+  modifiedTime,
+  section,
+  tags = [],
+  locale = "en_US",
+  alternateLocales = []
 }: SEOProps) => {
   const fullTitle = title.includes("Cinely") ? title : `${title} | Cinely`;
   const siteUrl = "https://cinely.vercel.app";
@@ -62,13 +76,49 @@ const SEO = ({
       <meta name="twitter:creator" content="@cinely" />
       
       {/* Additional Meta Tags */}
-      <meta name="author" content="Cinely" />
+      <meta name="author" content={author} />
       <meta name="publisher" content="Cinely" />
       <meta name="copyright" content="© 2024 Cinely. All rights reserved." />
       <meta name="language" content="en" />
       <meta name="revisit-after" content="7 days" />
       <meta name="distribution" content="global" />
       <meta name="rating" content="general" />
+      <meta name="geo.region" content="US" />
+      <meta name="geo.placename" content="United States" />
+      <meta name="geo.position" content="39.8283;-98.5795" />
+      <meta name="ICBM" content="39.8283, -98.5795" />
+      
+      {/* Article Meta Tags */}
+      {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+      {section && <meta property="article:section" content={section} />}
+      {author && <meta property="article:author" content={author} />}
+      {tags.map(tag => <meta key={tag} property="article:tag" content={tag} />)}
+      
+      {/* Locale Meta Tags */}
+      <meta property="og:locale" content={locale} />
+      {alternateLocales.map(locale => <meta key={locale} property="og:locale:alternate" content={locale} />)}
+      
+      {/* Additional Open Graph Tags */}
+      <meta property="og:updated_time" content={new Date().toISOString()} />
+      <meta property="og:see_also" content="https://cinely.vercel.app/movies" />
+      <meta property="og:see_also" content="https://cinely.vercel.app/tv-shows" />
+      
+      {/* Twitter Additional Tags */}
+      <meta name="twitter:domain" content="cinely.vercel.app" />
+      <meta name="twitter:url" content={fullCanonical || siteUrl} />
+      
+      {/* Mobile App Meta Tags */}
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="application-name" content="Cinely" />
+      <meta name="msapplication-TileColor" content="#6366f1" />
+      <meta name="msapplication-config" content="/browserconfig.xml" />
+      
+      {/* Security Meta Tags */}
+      <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+      <meta httpEquiv="X-Frame-Options" content="DENY" />
+      <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+      <meta name="referrer" content="strict-origin-when-cross-origin" />
       
       {/* Structured Data */}
       {structuredData && (
