@@ -13,6 +13,7 @@ export interface Title {
   genres: string[]
   rating?: string
   muxPlaybackId?: string
+  muxAssetId?: string
   isFree: boolean
   isOriginal: boolean
 }
@@ -156,7 +157,8 @@ export const mockTitles: Title[] = [
     durationSec: 7200, // 2h
     genres: ['Drama', 'Thriller', 'Psychological'],
     rating: 'R',
-    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
+    muxPlaybackId: 'Fr9xvpKXwDLsg5rNBUJMdWJJDw21xBfbs9rWm8Dkew4',
+    muxAssetId: 'jN1bZ6SUAHG68mGwEknScves3dlQGZ9HADk9sKxGqDA',
     isFree: true,
     isOriginal: true
   }
