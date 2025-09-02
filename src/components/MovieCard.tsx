@@ -25,6 +25,9 @@ interface MovieCardProps {
 const MovieCard = ({ movie, size = "md" }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+
+  // Debug logging
+  console.log('MovieCard poster URL:', movie.poster, 'for movie:', movie.title);
   
   const sizeClasses = {
     sm: "w-48 h-72",
