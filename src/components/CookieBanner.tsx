@@ -50,54 +50,63 @@ const CookieBanner = () => {
   };
 
   const loadGoogleAnalytics = () => {
-    // Google Analytics 4
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';
-    document.head.appendChild(script);
+    // Only load Google Analytics if we have a valid measurement ID
+    const measurementId = 'GA_MEASUREMENT_ID';
+    if (measurementId && measurementId !== 'GA_MEASUREMENT_ID') {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+      document.head.appendChild(script);
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: any[]) {
+        window.dataLayer.push(args);
+      }
+      gtag('js', new Date());
+      gtag('config', measurementId, {
+        page_title: document.title,
+        page_location: window.location.href
+      });
     }
-    gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID', {
-      page_title: document.title,
-      page_location: window.location.href
-    });
   };
 
   const loadFacebookPixel = () => {
-    // Facebook Pixel
-    const script = document.createElement('script');
-    script.innerHTML = `
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'FACEBOOK_PIXEL_ID');
-      fbq('track', 'PageView');
-    `;
-    document.head.appendChild(script);
+    // Only load Facebook Pixel if we have a valid pixel ID
+    const pixelId = 'FACEBOOK_PIXEL_ID';
+    if (pixelId && pixelId !== 'FACEBOOK_PIXEL_ID') {
+      const script = document.createElement('script');
+      script.innerHTML = `
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '${pixelId}');
+        fbq('track', 'PageView');
+      `;
+      document.head.appendChild(script);
+    }
   };
 
   const loadGoogleAds = () => {
-    // Google Ads Conversion Tracking
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID';
-    document.head.appendChild(script);
+    // Only load Google Ads if we have a valid conversion ID
+    const conversionId = 'AW-CONVERSION_ID';
+    if (conversionId && conversionId !== 'AW-CONVERSION_ID') {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${conversionId}`;
+      document.head.appendChild(script);
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: any[]) {
+        window.dataLayer.push(args);
+      }
+      gtag('js', new Date());
+      gtag('config', conversionId);
     }
-    gtag('js', new Date());
-    gtag('config', 'AW-CONVERSION_ID');
   };
 
   const handleAcceptAll = () => {

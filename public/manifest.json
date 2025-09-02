@@ -15,22 +15,9 @@
       "src": "/favicon.ico",
       "sizes": "any",
       "type": "image/x-icon"
-    },
-    {
-      "src": "/placeholder.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/placeholder.svg",
-      "sizes": "1280x720",
-      "type": "image/svg+xml",
-      "form_factor": "wide",
-      "label": "Cinely Homepage"
-    }
-  ],
+  "screenshots": [],
   "shortcuts": [
     {
       "name": "Watch Free",
@@ -40,7 +27,8 @@
       "icons": [
         {
           "src": "/favicon.ico",
-          "sizes": "any"
+          "sizes": "any",
+          "type": "image/x-icon"
         }
       ]
     },
@@ -52,7 +40,8 @@
       "icons": [
         {
           "src": "/favicon.ico",
-          "sizes": "any"
+          "sizes": "any",
+          "type": "image/x-icon"
         }
       ]
     },
@@ -64,7 +53,8 @@
       "icons": [
         {
           "src": "/favicon.ico",
-          "sizes": "any"
+          "sizes": "any",
+          "type": "image/x-icon"
         }
       ]
     }

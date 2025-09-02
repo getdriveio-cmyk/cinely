@@ -19,8 +19,12 @@ export const trackGAEvent = (eventName: string, parameters?: Record<string, any>
 
 // Facebook Pixel tracking
 export const trackFacebookEvent = (eventName: string, parameters?: Record<string, any>) => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', eventName, parameters);
+  if (typeof window !== 'undefined' && window.fbq && window.fbq !== null) {
+    try {
+      window.fbq('track', eventName, parameters);
+    } catch (error) {
+      console.warn('Facebook Pixel tracking failed:', error);
+    }
   }
 };
 
