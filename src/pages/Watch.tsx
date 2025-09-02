@@ -10,8 +10,8 @@ import { ArrowLeft, Play, Plus, Share2, ThumbsUp } from 'lucide-react';
 import { getPlaybackToken, updateContinueWatching, toggleWatchlist } from '@/lib/api';
 import { mockTitles } from '@/lib/api';
 
-// Lazy load Shaka Player to reduce initial bundle size
-const ShakaPlayer = lazy(() => import('@/components/ShakaPlayer'));
+// Lazy load Mux Player to reduce initial bundle size
+const MuxPlayer = lazy(() => import('@/components/MuxPlayer'));
 
 const Watch = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -71,14 +71,15 @@ const Watch = () => {
     setPlayerError('Failed to load video. Please try again.');
   };
 
-  const handleTimeUpdate = (time: number) => {
-    setCurrentTime(time);
+  const handleTimeUpdate = (currentTime: number, duration: number) => {
+    setCurrentTime(currentTime);
+    setDuration(duration);
     
     // Update continue watching every 30 seconds
-    if (time > 0 && time % 30 === 0 && title) {
+    if (currentTime > 0 && currentTime % 30 === 0 && title) {
       updateContinueWatching({
         titleId: title.id,
-        lastPosSec: time,
+        lastPosSec: currentTime,
         durationSec: duration
       });
     }
@@ -177,7 +178,7 @@ const Watch = () => {
                       </div>
                     </div>
                   }>
-                    <ShakaPlayer
+                    <MuxPlayer
                       playbackId={title.muxPlaybackId}
                       playbackToken={playbackToken || undefined}
                       autoplay={true}
@@ -186,6 +187,8 @@ const Watch = () => {
                       onEnded={handleVideoEnd}
                       onError={handlePlayerError}
                       className="w-full h-full"
+                      title={title.title}
+                      viewerUserId={user?.id}
                     />
                   </Suspense>
                 ) : (
