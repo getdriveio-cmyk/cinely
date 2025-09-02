@@ -26,15 +26,10 @@ const Header = () => {
   };
 
   const handleSignIn = async () => {
-    // Mock sign in - in real app, this would open a sign in modal
-    const email = prompt('Enter your email for demo login:');
-    if (email) {
-      try {
-        await signIn(email);
-        navigate('/dashboard');
-      } catch (error) {
-        console.error('Sign in error:', error);
-      }
+    try {
+      await signIn(); // Call Auth0 signIn
+    } catch (error) {
+      console.error('Sign in error:', error);
     }
   };
 

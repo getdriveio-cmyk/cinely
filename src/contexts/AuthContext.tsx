@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
 
 interface User {
   id: string
@@ -19,7 +20,8 @@ interface AuthContextType {
   user: User | null
   profile: UserProfile | null
   isLoading: boolean
-  signIn: (email: string) => Promise<void>
+  isAuthenticated: boolean
+  signIn: () => Promise<void>
   signOut: () => void
   updateProfile: (updates: Partial<UserProfile>) => Promise<void>
 }
@@ -39,69 +41,65 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const { 
+    user: auth0User, 
+    loginWithRedirect, 
+    logout, 
+    isLoading: auth0Loading,
+    isAuthenticated 
+  } = useAuth0()
+  
   const [user, setUser] = useState<User | null>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check for existing session on mount
-    const checkSession = async () => {
-      try {
-        const session = localStorage.getItem('cinely_session')
-        if (session) {
-          const sessionData = JSON.parse(session)
-          setUser(sessionData.user)
-          setProfile(sessionData.profile)
-        }
-      } catch (error) {
-        console.error('Error checking session:', error)
-      } finally {
-        setIsLoading(false)
+    if (auth0User && isAuthenticated) {
+      // Convert Auth0 user to our User interface
+      const convertedUser: User = {
+        id: auth0User.sub || '',
+        name: auth0User.name || auth0User.email || 'User',
+        email: auth0User.email || '',
+        image: auth0User.picture,
       }
-    }
-
-    checkSession()
-  }, [])
-
-  const signIn = async (email: string) => {
-    setIsLoading(true)
-    try {
-      // Mock authentication - in real app, this would call your API
-      const mockUser: User = {
-        id: 'mock-user-id',
-        name: 'Demo User',
-        email: email,
-        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'
-      }
-
-      const mockProfile: UserProfile = {
-        userId: mockUser.id,
-        displayName: mockUser.name,
-        avatarUrl: mockUser.image,
-        country: 'US',
+      
+      const convertedProfile: UserProfile = {
+        userId: convertedUser.id,
+        displayName: convertedUser.name,
+        avatarUrl: convertedUser.image,
+        country: 'US', // Default country
         onboardingAt: null // Will trigger onboarding flow
       }
+      
+      setUser(convertedUser)
+      setProfile(convertedProfile)
+      console.log('Auth0 user signed in:', convertedUser)
+    } else {
+      setUser(null)
+      setProfile(null)
+    }
+  }, [auth0User, isAuthenticated])
 
-      const sessionData = {
-        user: mockUser,
-        profile: mockProfile
-      }
-
-      localStorage.setItem('cinely_session', JSON.stringify(sessionData))
-      setUser(mockUser)
-      setProfile(mockProfile)
+  const signIn = async () => {
+    try {
+      await loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: window.location.origin,
+        },
+      })
     } catch (error) {
-      console.error('Sign in error:', error)
-      throw error
-    } finally {
-      setIsLoading(false)
+      console.error('Auth0 login error:', error)
     }
   }
 
   const signOut = () => {
-    localStorage.removeItem('cinely_session')
+    logout({
+      logoutParams: {
+        returnTo: window.location.origin,
+      },
+    })
     setUser(null)
     setProfile(null)
+    console.log('Auth0 user signed out')
   }
 
   const updateProfile = async (updates: Partial<UserProfile>) => {
@@ -122,7 +120,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const value: AuthContextType = {
     user,
     profile,
-    isLoading,
+    isLoading: auth0Loading,
+    isAuthenticated,
     signIn,
     signOut,
     updateProfile

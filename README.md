@@ -30,7 +30,7 @@ A modern streaming platform built with React, TypeScript, and Vite. Features per
 - **Routing**: React Router with lazy loading
 - **State Management**: React Context API
 - **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: NextAuth.js compatible (mock implementation)
+- **Authentication**: Auth0 OAuth integration
 - **Video**: Mux Video integration
 - **Deployment**: Vercel-ready configuration
 
@@ -39,6 +39,7 @@ A modern streaming platform built with React, TypeScript, and Vite. Features per
 ### Prerequisites
 - Node.js 18+ and npm
 - PostgreSQL database
+- Auth0 account (for authentication)
 - Mux account (for video streaming)
 
 ### Setup
@@ -64,6 +65,11 @@ A modern streaming platform built with React, TypeScript, and Vite. Features per
    NEXTAUTH_URL="http://localhost:8080"
    NEXTAUTH_SECRET="your-secret-key-here"
    
+   # Auth0
+   VITE_AUTH0_DOMAIN="dev-ifn3ugjt57otm5sy.us.auth0.com"
+   VITE_AUTH0_CLIENT_ID="2pqWILG5wJcfqJVIB20YHmRItjuDBPxt"
+   VITE_AUTH0_CLIENT_SECRET="zCCgMRsE1dn78_4QJ4Ig07PQVSsRhGCAxWf7N6NtkGsUGufLuFW0KwCryLQtKVvC"
+   
    # Mux
    MUX_TOKEN_ID="your-mux-token-id"
    MUX_TOKEN_SECRET="your-mux-token-secret"
@@ -74,7 +80,14 @@ A modern streaming platform built with React, TypeScript, and Vite. Features per
    VITE_MUX_DATA_ENV_KEY="your-mux-data-env-key"
    ```
 
-4. **Database Setup**
+4. **Auth0 Setup**
+   - Create an Auth0 account at [auth0.com](https://auth0.com)
+   - Create a new Single Page Application
+   - Configure allowed callback URLs: `http://localhost:8080`
+   - Configure allowed logout URLs: `http://localhost:8080`
+   - Copy your Domain, Client ID, and Client Secret to the `.env` file
+
+5. **Database Setup**
    ```bash
    # Generate Prisma client
    npm run db:generate
@@ -86,18 +99,18 @@ A modern streaming platform built with React, TypeScript, and Vite. Features per
    npm run db:seed
    ```
 
-5. **Start Development Server**
+6. **Start Development Server**
    ```bash
-npm run dev
-```
+   npm run dev
+   ```
 
    The application will be available at `http://localhost:8080`
 
 ## 🎯 Usage
 
-### Demo Login
+### Authentication
 1. Click the profile icon in the top-right corner
-2. Enter any email address when prompted
+2. Sign in with Auth0 (Google, GitHub, email, etc.)
 3. Complete the onboarding flow (3 steps)
 4. Explore the personalized dashboard
 

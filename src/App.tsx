@@ -10,6 +10,9 @@ import OfflineIndicator from "@/components/OfflineIndicator";
 import CookieBanner from "@/components/CookieBanner";
 import { initializeTracking } from "@/utils/tracking";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { Auth0Provider } from '@auth0/auth0-react';
+import { auth0Config } from "@/lib/auth0-config";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -40,46 +43,54 @@ const App = () => {
 
   return (
   <HelmetProvider>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <OfflineIndicator />
-          <CookieBanner />
-          <BrowserRouter
-            future={{
-              v7_startTransition: true,
-              v7_relativeSplatPath: true,
-            }}
-          >
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/watch-free" element={<WatchFree />} />
-                <Route path="/movies" element={<Movies />} />
-                <Route path="/tv-shows" element={<TVShows />} />
-                <Route path="/originals" element={<Originals />} />
-                <Route path="/trending" element={<Trending />} />
-                <Route path="/help" element={<Help />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                
-                {/* Authenticated routes */}
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/onboarding" element={<Onboarding />} />
-                <Route path="/watch/:slug" element={<Watch />} />
-                <Route path="/account" element={<Account />} />
-                
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </AuthProvider>
+    <Auth0Provider
+      domain={auth0Config.domain}
+      clientId={auth0Config.clientId}
+      authorizationParams={auth0Config.authorizationParams}
+      useRefreshTokens={auth0Config.useRefreshTokens}
+      cacheLocation={auth0Config.cacheLocation}
+    >
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <OfflineIndicator />
+            <CookieBanner />
+            <BrowserRouter
+              future={{
+                v7_startTransition: true,
+                v7_relativeSplatPath: true,
+              }}
+            >
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/watch-free" element={<WatchFree />} />
+                  <Route path="/movies" element={<Movies />} />
+                  <Route path="/tv-shows" element={<TVShows />} />
+                  <Route path="/originals" element={<Originals />} />
+                  <Route path="/trending" element={<Trending />} />
+                  <Route path="/help" element={<Help />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  
+                  {/* Authenticated routes */}
+                  <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                  <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+                  <Route path="/watch/:slug" element={<ProtectedRoute><Watch /></ProtectedRoute>} />
+                  <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                  
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </AuthProvider>
+    </Auth0Provider>
   </HelmetProvider>
   );
 };
