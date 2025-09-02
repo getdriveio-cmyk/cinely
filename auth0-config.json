@@ -1,0 +1,35 @@
+{
+  "domain": "dev-ifn3ugjt57otm5sy.us.auth0.com",
+  "clientId": "2pqWILG5wJcfqJVIB20YHmRItjuDBPxt",
+  "clientSecret": "zCCgMRsE1dn78_4QJ4Ig07PQVSsRhGCAxWf7N6NtkGsUGufLuFW0KwCryLQtKVvC",
+  "application": {
+    "name": "Cinely Streaming Platform",
+    "type": "spa",
+    "callbacks": [
+      "http://localhost:8080",
+      "https://cinely.vercel.app"
+    ],
+    "logoutUrls": [
+      "http://localhost:8080",
+      "https://cinely.vercel.app"
+    ],
+    "webOrigins": [
+      "http://localhost:8080",
+      "https://cinely.vercel.app"
+    ],
+    "allowedOrigins": [
+      "http://localhost:8080",
+      "https://cinely.vercel.app"
+    ],
+    "grantTypes": [
+      "authorization_code",
+      "refresh_token",
+      "implicit"
+    ],
+    "scopes": [
+      "openid",
+      "profile",
+      "email"
+    ]
+  }
+}

@@ -9,3 +9,30 @@ export const auth0Config = {
   useRefreshTokens: true,
   cacheLocation: 'localstorage' as const,
 };
+
+// Helper function to get the current environment
+export const getCurrentEnvironment = () => {
+  const origin = window.location.origin;
+  
+  if (origin.includes('localhost')) {
+    return 'development';
+  } else if (origin.includes('vercel.app')) {
+    return 'production';
+  } else {
+    return 'unknown';
+  }
+};
+
+// Helper function to get the appropriate API base URL
+export const getApiBaseUrl = () => {
+  const env = getCurrentEnvironment();
+  
+  switch (env) {
+    case 'development':
+      return 'http://localhost:8080/api';
+    case 'production':
+      return 'https://cinely.vercel.app/api';
+    default:
+      return window.location.origin + '/api';
+  }
+};

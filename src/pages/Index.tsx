@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import HeroBanner from "@/components/HeroBanner";
 import MovieRail from "@/components/MovieRail";
 import SEO from "@/components/SEO";
+
 import { movieRails } from "@/data/mockMovies";
 import { getWebsiteStructuredData, getOrganizationStructuredData } from "@/utils/structuredData";
 
@@ -32,6 +33,8 @@ const Index = () => {
       
       {/* Header */}
       <Header />
+
+
 
       {/* Hero Section */}
       <HeroBanner />
