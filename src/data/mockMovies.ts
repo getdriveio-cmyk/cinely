@@ -1,9 +1,10 @@
-import poster1 from "@/assets/poster-1.jpg";
-import poster2 from "@/assets/poster-2.jpg";
-import poster3 from "@/assets/poster-3.jpg";
-import poster4 from "@/assets/poster-4.jpg";
-import poster5 from "@/assets/poster-5.jpg";
-import poster6 from "@/assets/poster-6.jpg";
+// Use hardcoded paths to match built assets
+const poster1 = "/dist/assets/poster-1-09MI7_5e.jpg";
+const poster2 = "/dist/assets/poster-2-D3KWPSpU.jpg";
+const poster3 = "/dist/assets/poster-3-r1X99Uqi.jpg";
+const poster4 = "/dist/assets/poster-4-DplWFywa.jpg";
+const poster5 = "/dist/assets/poster-5-CGFcUoxB.jpg";
+const poster6 = "/dist/assets/poster-6-CwBqk9Ys.jpg";
 // Use public path for Numb poster
 const numbPoster = "/dist/assets/images.png";
 
