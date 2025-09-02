@@ -7,13 +7,9 @@
     <meta name="description" content="Stream thousands of movies and shows with Cinely. Watch free with ads or upgrade to our premium ad-free experience. Your cinematic journey starts here." />
     <meta name="author" content="Lovable" />
     
-    <!-- PWA Manifest -->
+    <!-- Web App Manifest -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#6366f1" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Cinely" />
     
     <!-- SEO Meta Tags -->
     <meta name="robots" content="index, follow" />
@@ -38,5 +34,7 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Temporary script to unregister service workers -->
+    <script src="/unregister-sw.js"></script>
   </body>
 </html>
