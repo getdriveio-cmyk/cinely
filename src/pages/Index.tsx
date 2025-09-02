@@ -1,12 +1,81 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from "@/components/Header";
+import HeroBanner from "@/components/HeroBanner";
+import MovieRail from "@/components/MovieRail";
+import { movieRails } from "@/data/mockMovies";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <Header />
+
+      {/* Hero Section */}
+      <HeroBanner />
+
+      {/* Movie Rails */}
+      <div className="relative z-10 -mt-32">
+        {movieRails.map((rail, index) => (
+          <MovieRail 
+            key={index}
+            title={rail.title}
+            movies={rail.movies}
+            size={index === 0 ? "lg" : "md"}
+          />
+        ))}
       </div>
+
+      {/* Footer */}
+      <footer className="bg-card/50 border-t border-border mt-16">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Logo & Description */}
+            <div className="col-span-1 md:col-span-2">
+              <h3 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-4">
+                Cinely
+              </h3>
+              <p className="text-muted-foreground mb-4 max-w-md">
+                Your premium streaming destination. Watch thousands of movies and shows with ads, 
+                or upgrade to our ad-free experience.
+              </p>
+              <div className="flex gap-4">
+                <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
+                  Free with Ads
+                </span>
+                <span className="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">
+                  Premium Ad-Free
+                </span>
+              </div>
+            </div>
+
+            {/* Navigation Links */}
+            <div>
+              <h4 className="font-semibold mb-4">Browse</h4>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Movies</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">TV Shows</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Originals</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Trending</a></li>
+              </ul>
+            </div>
+
+            {/* Support */}
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center text-muted-foreground text-sm">
+            <p>&copy; 2024 Cinely. All rights reserved.</p>
+            <p>Built with ❤️ for movie lovers everywhere</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
