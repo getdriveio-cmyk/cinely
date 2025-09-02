@@ -34,5 +34,17 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Unregister any existing service workers -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          console.log('Found', registrations.length, 'service worker registrations to unregister');
+          for(let registration of registrations) {
+            console.log('Unregistering service worker:', registration.scope);
+            registration.unregister();
+          }
+        });
+      }
+    </script>
   </body>
 </html>
