@@ -1,0 +1,74 @@
+{
+  "name": "Cinely - Premium Streaming Destination",
+  "short_name": "Cinely",
+  "description": "Stream thousands of movies and shows with Cinely. Watch free with ads or upgrade to our premium ad-free experience.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["entertainment", "streaming", "movies", "tv"],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/placeholder.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/placeholder.svg",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Cinely Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Watch Free",
+      "short_name": "Free",
+      "description": "Start watching free content",
+      "url": "/watch-free",
+      "icons": [
+        {
+          "src": "/favicon.ico",
+          "sizes": "any"
+        }
+      ]
+    },
+    {
+      "name": "Movies",
+      "short_name": "Movies",
+      "description": "Browse movies",
+      "url": "/movies",
+      "icons": [
+        {
+          "src": "/favicon.ico",
+          "sizes": "any"
+        }
+      ]
+    },
+    {
+      "name": "TV Shows",
+      "short_name": "TV",
+      "description": "Browse TV shows",
+      "url": "/tv-shows",
+      "icons": [
+        {
+          "src": "/favicon.ico",
+          "sizes": "any"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

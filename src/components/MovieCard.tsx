@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Play, Plus, Star } from "lucide-react";
 import { useState } from "react";
+import LazyImage from "./LazyImage";
 
 interface Movie {
   id: string;
@@ -35,10 +36,10 @@ const MovieCard = ({ movie, size = "md" }: MovieCardProps) => {
     >
       {/* Poster Image */}
       <div className="relative w-full h-full rounded-lg overflow-hidden bg-gradient-card">
-        <img 
+        <LazyImage 
           src={movie.poster} 
           alt={movie.title}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-full transition-transform duration-300 group-hover:scale-110"
         />
         
         {/* Overlay */}

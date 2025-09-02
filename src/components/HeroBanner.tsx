@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Plus, Info } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroBanner from "@/assets/hero-banner.jpg";
+import LazyImage from "./LazyImage";
 
 const HeroBanner = () => {
   const navigate = useNavigate();
@@ -10,10 +11,10 @@ const HeroBanner = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
+        <LazyImage 
           src={heroBanner} 
           alt="Featured content" 
-          className="w-full h-full object-cover"
+          className="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-overlay" />
         <div className="absolute inset-0 bg-background/20" />
