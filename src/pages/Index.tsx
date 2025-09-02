@@ -51,10 +51,10 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Browse</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Movies</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">TV Shows</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Originals</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Trending</a></li>
+                <li><a href="/movies" className="hover:text-foreground transition-colors">Movies</a></li>
+                <li><a href="/tv-shows" className="hover:text-foreground transition-colors">TV Shows</a></li>
+                <li><a href="/originals" className="hover:text-foreground transition-colors">Originals</a></li>
+                <li><a href="/trending" className="hover:text-foreground transition-colors">Trending</a></li>
               </ul>
             </div>
 
@@ -62,10 +62,10 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
+                <li><a href="/help" className="hover:text-foreground transition-colors">Help Center</a></li>
+                <li><a href="/contact" className="hover:text-foreground transition-colors">Contact Us</a></li>
+                <li><a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a></li>
               </ul>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { Check, Play, Star, Clock, Users, Zap } from "lucide-react";
 import { useState } from "react";
 import { mockMovies } from "@/data/mockMovies";
 import MovieCard from "@/components/MovieCard";
+import Header from "@/components/Header";
 
 const WatchFree = () => {
   const [email, setEmail] = useState("");
@@ -72,17 +73,7 @@ const WatchFree = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-            Cinely
-          </a>
-          <div className="flex items-center gap-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button variant="outline">Contact</Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="py-20 lg:py-32">

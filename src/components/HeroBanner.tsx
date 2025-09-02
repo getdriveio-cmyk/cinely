@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Play, Plus, Info } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const HeroBanner = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -44,7 +47,7 @@ const HeroBanner = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 shadow-hero text-lg px-8 py-3 h-auto"
-              onClick={() => window.location.href = '/watch-free'}
+              onClick={() => navigate('/watch-free')}
             >
               <Play className="w-5 h-5 mr-2" />
               Start Watching Free
