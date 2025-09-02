@@ -41,15 +41,18 @@ const ShakaPlayer: React.FC<ShakaPlayerProps> = ({
 
         // Check if the browser is supported
         if (shaka.Player.isBrowserSupported()) {
-          // Create a Player instance
-          const player = new shaka.Player(videoRef.current);
+          // Create a Player instance (using new recommended method)
+          const player = new shaka.Player();
           playerRef.current = player;
+
+          // Attach to video element
+          await player.attach(videoRef.current);
 
           // Initialize Mux Data monitoring
           initShakaPlayerMux(player, {
-            debug: process.env.NODE_ENV === 'development',
+            debug: import.meta.env.DEV,
             data: {
-              env_key: process.env.VITE_MUX_DATA_ENV_KEY || 'your-mux-data-env-key',
+              env_key: import.meta.env.VITE_MUX_DATA_ENV_KEY || 'your-mux-data-env-key',
               // Video metadata
               video_id: playbackId,
               video_title: `Cinely Content - ${playbackId}`,
