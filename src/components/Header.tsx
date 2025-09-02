@@ -27,17 +27,9 @@ const Header = () => {
 
   const handleSignIn = async () => {
     try {
-      console.log('Attempting to sign in...');
-      console.log('Auth0 Config:', {
-        domain: import.meta.env.VITE_AUTH0_DOMAIN,
-        clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
-        redirectUri: window.location.origin
-      });
       await signIn(); // Call Auth0 signIn
     } catch (error) {
       console.error('Sign in error:', error);
-      // Show user-friendly error message
-      alert('Login failed. Please check the console for details.');
     }
   };
 
