@@ -9,6 +9,7 @@ import PageLoader from "@/components/PageLoader";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import CookieBanner from "@/components/CookieBanner";
 import { initializeTracking } from "@/utils/tracking";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -23,6 +24,12 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+// New authenticated pages
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Onboarding = lazy(() => import("./pages/Onboarding"));
+const Watch = lazy(() => import("./pages/Watch"));
+const Account = lazy(() => import("./pages/Account"));
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -33,37 +40,46 @@ const App = () => {
 
   return (
   <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <OfflineIndicator />
-        <CookieBanner />
-        <BrowserRouter
-          future={{
-            v7_startTransition: true,
-            v7_relativeSplatPath: true,
-          }}
-        >
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/watch-free" element={<WatchFree />} />
-              <Route path="/movies" element={<Movies />} />
-              <Route path="/tv-shows" element={<TVShows />} />
-              <Route path="/originals" element={<Originals />} />
-              <Route path="/trending" element={<Trending />} />
-              <Route path="/help" element={<Help />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <OfflineIndicator />
+          <CookieBanner />
+          <BrowserRouter
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true,
+            }}
+          >
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/watch-free" element={<WatchFree />} />
+                <Route path="/movies" element={<Movies />} />
+                <Route path="/tv-shows" element={<TVShows />} />
+                <Route path="/originals" element={<Originals />} />
+                <Route path="/trending" element={<Trending />} />
+                <Route path="/help" element={<Help />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                
+                {/* Authenticated routes */}
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/onboarding" element={<Onboarding />} />
+                <Route path="/watch/:slug" element={<Watch />} />
+                <Route path="/account" element={<Account />} />
+                
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </AuthProvider>
   </HelmetProvider>
   );
 };
