@@ -156,7 +156,7 @@ export const mockTitles: Title[] = [
     durationSec: 7200, // 2h
     genres: ['Drama', 'Thriller', 'Psychological'],
     rating: 'R',
-    muxPlaybackId: 'Fr9xvpKXwDLsg5rNBUJMdWJJDw21xBfbs9rWm8Dkew4',
+    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: true,
     isOriginal: true
   }
@@ -257,11 +257,12 @@ export const updateContinueWatching = async (data: {
   console.log('Updated continue watching:', data)
 }
 
-export const getPlaybackToken = async (titleId: string, device: string): Promise<string> => {
+export const getPlaybackToken = async (titleId: string, device: string): Promise<string | null> => {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 200))
-  // Mock JWT token - in real app, this would be signed with your secret
-  return `mock-jwt-token-${titleId}-${Date.now()}`
+  // For now, return null to use public playback
+  // In production, this would return a signed JWT token for private content
+  return null
 }
 
 export const markNotificationRead = async (notificationId: string): Promise<void> => {
