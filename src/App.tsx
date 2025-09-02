@@ -14,6 +14,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { auth0Config } from "@/lib/auth0-config";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AuthRedirectHandler from "@/components/AuthRedirectHandler";
+import AuthDebug from "@/components/AuthDebug";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -89,6 +90,7 @@ const App = () => {
                 </Routes>
               </Suspense>
             </BrowserRouter>
+            <AuthDebug />
           </TooltipProvider>
         </QueryClientProvider>
       </AuthProvider>
