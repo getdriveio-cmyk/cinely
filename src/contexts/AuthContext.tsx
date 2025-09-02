@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     loginWithRedirect, 
     logout, 
     isLoading: auth0Loading,
-    isAuthenticated 
+    isAuthenticated
   } = useAuth0()
   
   const [user, setUser] = useState<User | null>(null)
@@ -84,6 +84,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await loginWithRedirect({
         authorizationParams: {
           redirect_uri: window.location.origin,
+          appState: {
+            returnTo: '/dashboard'
+          }
         },
       })
     } catch (error) {

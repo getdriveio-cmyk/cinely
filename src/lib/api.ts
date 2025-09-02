@@ -144,6 +144,21 @@ export const mockTitles: Title[] = [
     muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: false,
     isOriginal: false
+  },
+  {
+    id: '7',
+    title: 'Numb',
+    slug: 'numb',
+    description: 'A gripping psychological thriller that follows a man who loses the ability to feel physical pain after a traumatic accident. As he navigates a world where he can no longer distinguish between safety and danger, he discovers that emotional numbness might be the real curse. This intense character study explores themes of trauma, healing, and the human need for connection in a world that has become increasingly disconnected.',
+    posterUrl: '/dist/assets/images.png',
+    backdropUrl: '/src/assets/hero-banner.jpg',
+    releaseDate: '2024-12-15',
+    durationSec: 7200, // 2h
+    genres: ['Drama', 'Thriller', 'Psychological'],
+    rating: 'R',
+    muxPlaybackId: 'Fr9xvpKXwDLsg5rNBUJMdWJJDw21xBfbs9rWm8Dkew4',
+    isFree: true,
+    isOriginal: true
   }
 ]
 
@@ -184,20 +199,31 @@ export const mockDashboardData: DashboardData = {
     {
       title: mockTitles[5],
       reason: 'popular_in_genre'
+    },
+    {
+      title: mockTitles[6], // Numb
+      reason: 'popular_in_genre'
     }
   ],
-  trending7d: [mockTitles[0], mockTitles[2], mockTitles[4]],
-  newlyAdded: [mockTitles[3], mockTitles[1]],
+  trending7d: [mockTitles[0], mockTitles[2], mockTitles[4], mockTitles[6]], // Added Numb
+  newlyAdded: [mockTitles[6], mockTitles[3], mockTitles[1]], // Numb as newest
   notifications: [
     {
       id: '1',
+      title: 'New Cinely Original',
+      body: 'Numb - A gripping psychological thriller is now streaming!',
+      href: '/watch/numb',
+      read: false
+    },
+    {
+      id: '2',
       title: 'New Release',
       body: 'The Last Stand Season 2 is now available!',
       href: '/watch/cinely-original-the-last-stand',
       read: false
     },
     {
-      id: '2',
+      id: '3',
       title: 'Watchlist Update',
       body: 'Inception is now available to watch',
       href: '/watch/inception',

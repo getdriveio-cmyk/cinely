@@ -13,6 +13,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { Auth0Provider } from '@auth0/auth0-react';
 import { auth0Config } from "@/lib/auth0-config";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import AuthRedirectHandler from "@/components/AuthRedirectHandler";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -63,6 +64,7 @@ const App = () => {
                 v7_relativeSplatPath: true,
               }}
             >
+              <AuthRedirectHandler />
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path="/" element={<Index />} />

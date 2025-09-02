@@ -3,7 +3,6 @@ export const auth0Config = {
   clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || '2pqWILG5wJcfqJVIB20YHmRItjuDBPxt',
   authorizationParams: {
     redirect_uri: window.location.origin,
-    audience: 'https://cinely.vercel.app/api', // Optional: your API audience
     scope: 'openid profile email'
   },
   useRefreshTokens: true,
@@ -24,6 +23,7 @@ export const getCurrentEnvironment = () => {
 };
 
 // Helper function to get the appropriate API base URL
+// Note: This is for future API integration - not needed for basic OAuth
 export const getApiBaseUrl = () => {
   const env = getCurrentEnvironment();
   
