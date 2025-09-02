@@ -35,7 +35,7 @@
           console.log('✅ All caches cleared');
           
           // Force reload the page to ensure fresh content
-          if (!hasReloaded && (registrations.length > 0 || cacheNames.length > 0)) {
+          if (!hasReloaded && registrations.length > 0) {
             hasReloaded = true;
             console.log('🔄 Reloading page to ensure fresh content...');
             setTimeout(() => {

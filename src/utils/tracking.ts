@@ -38,30 +38,9 @@ export const trackEvent = (event: TrackingEvent) => {
   // Track in Facebook Pixel
   trackFacebookEvent(eventName, properties);
   
-  // Track in custom analytics
-  trackCustomEvent(eventName, properties, timestamp);
-};
-
-// Custom analytics tracking
-export const trackCustomEvent = (eventName: string, properties: Record<string, any>, timestamp: number) => {
-  // Send to your custom analytics endpoint
-  if (typeof window !== 'undefined') {
-    fetch('/api/analytics', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        event: eventName,
-        properties,
-        timestamp,
-        url: window.location.href,
-        userAgent: navigator.userAgent,
-        referrer: document.referrer
-      })
-    }).catch(error => {
-      console.warn('Analytics tracking failed:', error);
-    });
+  // Log to console for development (no API calls)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Analytics Event:', eventName, properties);
   }
 };
 
