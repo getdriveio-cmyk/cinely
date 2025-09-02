@@ -62,7 +62,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         image: auth0User.picture,
       }
       
-      const convertedProfile: UserProfile = {
+      // Check if we have saved profile data
+      const session = localStorage.getItem('cinely_session')
+      let savedProfile: UserProfile | null = null
+      
+      if (session) {
+        try {
+          const sessionData = JSON.parse(session)
+          if (sessionData.profile && sessionData.profile.userId === convertedUser.id) {
+            savedProfile = sessionData.profile
+          }
+        } catch (error) {
+          console.error('Error parsing session data:', error)
+        }
+      }
+      
+      const convertedProfile: UserProfile = savedProfile || {
         userId: convertedUser.id,
         displayName: convertedUser.name,
         avatarUrl: convertedUser.image,
@@ -73,6 +88,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(convertedUser)
       setProfile(convertedProfile)
       console.log('Auth0 user signed in:', convertedUser)
+      
+      // Save to localStorage if not already saved
+      if (!savedProfile) {
+        localStorage.setItem('cinely_session', JSON.stringify({
+          user: convertedUser,
+          profile: convertedProfile
+        }))
+      }
     } else {
       setUser(null)
       setProfile(null)

@@ -97,11 +97,18 @@ const Onboarding = () => {
   useEffect(() => {
     if (!user) {
       navigate('/');
+      return;
     }
-  }, [user, navigate]);
+    
+    // If user has already completed onboarding, redirect to dashboard
+    if (user && profile?.onboardingAt) {
+      navigate('/dashboard');
+      return;
+    }
+  }, [user, profile, navigate]);
 
-  // Don't render if no user
-  if (!user) {
+  // Don't render if no user or if onboarding already completed
+  if (!user || profile?.onboardingAt) {
     return null;
   }
 

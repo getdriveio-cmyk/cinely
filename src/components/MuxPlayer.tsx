@@ -95,6 +95,8 @@ const MuxPlayerComponent: React.FC<MuxPlayerProps> = ({
         controls
         playsInline
         preload="metadata"
+        autoPlay={autoplay}
+        startTime={startTime}
         style={{
           width: '100%',
           height: '100%',
