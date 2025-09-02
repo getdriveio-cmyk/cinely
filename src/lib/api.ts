@@ -66,7 +66,7 @@ export const mockTitles: Title[] = [
     durationSec: 9120, // 2h 32m
     genres: ['Action', 'Crime', 'Drama'],
     rating: 'PG-13',
-    muxPlaybackId: 'mock-playback-1',
+    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: true,
     isOriginal: false
   },
@@ -81,7 +81,7 @@ export const mockTitles: Title[] = [
     durationSec: 8880, // 2h 28m
     genres: ['Action', 'Sci-Fi', 'Thriller'],
     rating: 'PG-13',
-    muxPlaybackId: 'mock-playback-2',
+    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: false,
     isOriginal: false
   },
@@ -96,7 +96,7 @@ export const mockTitles: Title[] = [
     durationSec: 10200, // 2h 50m
     genres: ['Adventure', 'Drama', 'Sci-Fi'],
     rating: 'PG-13',
-    muxPlaybackId: 'mock-playback-3',
+    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: true,
     isOriginal: false
   },
@@ -111,7 +111,7 @@ export const mockTitles: Title[] = [
     durationSec: 3600, // 1h
     genres: ['Drama', 'Thriller', 'Sci-Fi'],
     rating: 'R',
-    muxPlaybackId: 'mock-playback-4',
+    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: false,
     isOriginal: true
   },
@@ -126,7 +126,7 @@ export const mockTitles: Title[] = [
     durationSec: 9240, // 2h 34m
     genres: ['Crime', 'Drama'],
     rating: 'R',
-    muxPlaybackId: 'mock-playback-5',
+    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: true,
     isOriginal: false
   },
@@ -141,7 +141,7 @@ export const mockTitles: Title[] = [
     durationSec: 8160, // 2h 16m
     genres: ['Action', 'Sci-Fi'],
     rating: 'R',
-    muxPlaybackId: 'mock-playback-6',
+    muxPlaybackId: 'VZtzUzGRv02J4xnwkxW8j6EO1TIClQDkF7A',
     isFree: false,
     isOriginal: false
   }

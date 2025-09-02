@@ -69,6 +69,9 @@ A modern streaming platform built with React, TypeScript, and Vite. Features per
    MUX_TOKEN_SECRET="your-mux-token-secret"
    MUX_SIGNING_KEY_ID="your-mux-signing-key-id"
    MUX_SIGNING_KEY_PRIVATE="your-mux-signing-key-private"
+   
+   # Mux Data (for analytics)
+   VITE_MUX_DATA_ENV_KEY="your-mux-data-env-key"
    ```
 
 4. **Database Setup**
@@ -176,12 +179,20 @@ Currently uses a mock authentication system for demo purposes. To implement real
 
 ## 📺 Mux Integration
 
-The application is designed to work with Mux Video for streaming:
+The application uses Shaka Player with Mux Video for streaming:
 
-1. **Signed Playback**: JWT tokens for secure video access
-2. **Playback Restrictions**: Device and user-based access control
-3. **Analytics**: Mux Data integration for viewing insights
-4. **Ad Integration**: Google IMA for AVOD content
+1. **Shaka Player**: Industry-standard adaptive streaming player
+2. **Mux Data Analytics**: Real-time video performance monitoring
+3. **Signed Playback**: JWT tokens for secure video access
+4. **Playback Restrictions**: Device and user-based access control
+5. **Ad Integration**: Google IMA for AVOD content
+
+### Shaka Player Features
+- **Adaptive Streaming**: Automatic quality adjustment based on bandwidth
+- **Cross-Platform**: Works on all modern browsers and devices
+- **HLS Support**: Native HLS streaming support
+- **Error Handling**: Robust error recovery and reporting
+- **Accessibility**: Built-in accessibility features
 
 ## 🧪 Testing
 

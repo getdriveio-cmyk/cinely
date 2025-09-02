@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Header';
@@ -10,6 +10,9 @@ import { ArrowLeft, Play, Plus, Share2, ThumbsUp } from 'lucide-react';
 import { getPlaybackToken, updateContinueWatching, toggleWatchlist } from '@/lib/api';
 import { mockTitles } from '@/lib/api';
 
+// Lazy load Shaka Player to reduce initial bundle size
+const ShakaPlayer = lazy(() => import('@/components/ShakaPlayer'));
+
 const Watch = () => {
   const { slug } = useParams<{ slug: string }>();
   const [searchParams] = useSearchParams();
@@ -19,9 +22,9 @@ const Watch = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [playbackToken, setPlaybackToken] = useState<string | null>(null);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [playerError, setPlayerError] = useState<string | null>(null);
 
   const resumePosition = searchParams.get('at');
   const resumeTime = resumePosition ? parseInt(resumePosition) : 0;
@@ -63,12 +66,9 @@ const Watch = () => {
     }
   };
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-    
-    // In a real app, this would start the Mux player
-    console.log('Starting playback with token:', playbackToken);
-    console.log('Resume position:', resumeTime);
+  const handlePlayerError = (error: any) => {
+    console.error('Player error:', error);
+    setPlayerError('Failed to load video. Please try again.');
   };
 
   const handleTimeUpdate = (time: number) => {
@@ -93,7 +93,6 @@ const Watch = () => {
         completed: true
       });
     }
-    setIsPlaying(false);
   };
 
   const handleWatchlistToggle = async () => {
@@ -168,32 +167,34 @@ const Watch = () => {
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
               {/* Video Player */}
-              <div className="aspect-video bg-black rounded-lg overflow-hidden">
-                {isPlaying ? (
-                  <div className="w-full h-full flex items-center justify-center bg-muted">
-                    <div className="text-center">
+              <div className="aspect-video">
+                {title?.muxPlaybackId ? (
+                  <Suspense fallback={
+                    <div className="w-full h-full bg-black rounded-lg flex items-center justify-center">
+                      <div className="text-center text-white">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
+                        <p>Loading video player...</p>
+                      </div>
+                    </div>
+                  }>
+                    <ShakaPlayer
+                      playbackId={title.muxPlaybackId}
+                      playbackToken={playbackToken || undefined}
+                      autoplay={true}
+                      startTime={resumeTime}
+                      onTimeUpdate={handleTimeUpdate}
+                      onEnded={handleVideoEnd}
+                      onError={handlePlayerError}
+                      className="w-full h-full"
+                    />
+                  </Suspense>
+                ) : (
+                  <div className="w-full h-full bg-black rounded-lg flex items-center justify-center">
+                    <div className="text-center text-white">
                       <div className="text-2xl font-bold mb-2">🎬</div>
                       <p className="text-muted-foreground">
-                        Mux Player would be here
+                        No video available for this content
                       </p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Token: {playbackToken?.substring(0, 20)}...
-                      </p>
-                      {resumeTime > 0 && (
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Resuming at {formatDuration(resumeTime)}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div 
-                    className="w-full h-full bg-cover bg-center flex items-center justify-center cursor-pointer group"
-                    style={{ backgroundImage: `url(${title.backdropUrl})` }}
-                    onClick={handlePlay}
-                  >
-                    <div className="bg-black/50 rounded-full p-4 group-hover:bg-black/70 transition-colors">
-                      <Play className="h-12 w-12 text-white" />
                     </div>
                   </div>
                 )}
