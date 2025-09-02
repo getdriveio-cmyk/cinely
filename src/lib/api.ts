@@ -183,6 +183,18 @@ export const mockTitles: Title[] = [
 export const mockDashboardData: DashboardData = {
   continueWatching: [
     {
+      title: mockTitles[7], // Myke Wright does Comedy in Space
+      progressPct: 30,
+      lastPosSec: 1620, // 30% of 5400 seconds
+      muxPlaybackId: 'dZ27RgIMjIXYIiF01gmWlh9ERyIrXaUl9mobCBLoinaA'
+    },
+    {
+      title: mockTitles[6], // Numb
+      progressPct: 25,
+      lastPosSec: 1800, // 25% of 7200 seconds
+      muxPlaybackId: 'Fr9xvpKXwDLsg5rNBUJMdWJJDw21xBfbs9rWm8Dkew4'
+    },
+    {
       title: mockTitles[0],
       progressPct: 45,
       lastPosSec: 4104, // 45% of 9120 seconds
