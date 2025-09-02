@@ -3,6 +3,7 @@ import { poster1, poster2, poster3, poster4, poster5, poster6, numbPoster, mykeW
 export interface Movie {
   id: string;
   title: string;
+  slug: string;
   rating: string;
   year: number;
   duration: number; // in minutes
@@ -16,6 +17,7 @@ export const mockMovies: Movie[] = [
   {
     id: "1",
     title: "Dark Horizon",
+    slug: "dark-horizon",
     rating: "8.4",
     year: 2024,
     duration: 142,
@@ -26,6 +28,7 @@ export const mockMovies: Movie[] = [
   {
     id: "2", 
     title: "Neon Dreams",
+    slug: "neon-dreams",
     rating: "7.9",
     year: 2024,
     duration: 118,
@@ -37,6 +40,7 @@ export const mockMovies: Movie[] = [
   {
     id: "3",
     title: "The Last Stand",
+    slug: "the-last-stand",
     rating: "9.1",
     year: 2023,
     duration: 156,
@@ -47,6 +51,7 @@ export const mockMovies: Movie[] = [
   {
     id: "4",
     title: "Midnight Terror", 
+    slug: "midnight-terror",
     rating: "7.2",
     year: 2024,
     duration: 98,
@@ -57,6 +62,7 @@ export const mockMovies: Movie[] = [
   {
     id: "5",
     title: "City Lights",
+    slug: "city-lights",
     rating: "8.7",
     year: 2024,
     duration: 104,
@@ -68,6 +74,7 @@ export const mockMovies: Movie[] = [
   {
     id: "6",
     title: "Ocean's Edge",
+    slug: "oceans-edge",
     rating: "8.0",
     year: 2023,
     duration: 134,
@@ -78,6 +85,7 @@ export const mockMovies: Movie[] = [
   {
     id: "7",
     title: "Numb",
+    slug: "numb",
     rating: "8.9",
     year: 2024,
     duration: 120,
@@ -89,6 +97,7 @@ export const mockMovies: Movie[] = [
   {
     id: "8",
     title: "Myke Wright does Comedy in Space",
+    slug: "myke-wright-comedy-space",
     rating: "8.5",
     year: 2024,
     duration: 90,

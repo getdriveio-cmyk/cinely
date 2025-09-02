@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Play, Plus, Star } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LazyImage from "./LazyImage";
 import { trackUserInteraction } from "@/utils/tracking";
 
 interface Movie {
   id: string;
   title: string;
+  slug: string;
   rating: string;
   year: number;
   duration: number;
@@ -22,6 +24,7 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie, size = "md" }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
   
   const sizeClasses = {
     sm: "w-48 h-72",
@@ -29,11 +32,17 @@ const MovieCard = ({ movie, size = "md" }: MovieCardProps) => {
     lg: "w-80 h-[480px]"
   };
 
+  const handleCardClick = () => {
+    trackUserInteraction('view_movie', movie.title, movie.id);
+    navigate(`/watch/${movie.slug}`);
+  };
+
   return (
     <div 
       className={`relative ${sizeClasses[size]} group cursor-pointer transition-all duration-300 hover:scale-105 hover:z-10`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleCardClick}
     >
       {/* Poster Image */}
       <div className="relative w-full h-full rounded-lg overflow-hidden bg-gradient-card">
@@ -87,6 +96,7 @@ const MovieCard = ({ movie, size = "md" }: MovieCardProps) => {
                 onClick={(e) => {
                   e.stopPropagation();
                   trackUserInteraction('play_movie', movie.title, movie.id);
+                  navigate(`/watch/${movie.slug}`);
                 }}
               >
                 <Play className="w-3 h-3 mr-1" />
