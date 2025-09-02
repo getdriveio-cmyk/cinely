@@ -4,7 +4,8 @@ import poster3 from "@/assets/poster-3.jpg";
 import poster4 from "@/assets/poster-4.jpg";
 import poster5 from "@/assets/poster-5.jpg";
 import poster6 from "@/assets/poster-6.jpg";
-import numbPoster from "/dist/assets/images.png";
+// Use public path for Numb poster
+const numbPoster = "/dist/assets/images.png";
 
 export interface Movie {
   id: string;
