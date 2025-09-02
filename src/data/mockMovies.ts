@@ -92,32 +92,47 @@ export const mockMovies: Movie[] = [
     poster: numbPoster,
     isAdFree: true,
     synopsis: "A gripping psychological thriller that follows a man who loses the ability to feel physical pain after a traumatic accident. As he navigates a world where he can no longer distinguish between safety and danger, he discovers that emotional numbness might be the real curse."
+  },
+  {
+    id: "8",
+    title: "Myke Wright does Comedy in Space",
+    rating: "8.5",
+    year: 2024,
+    duration: 90,
+    genre: ["Comedy", "Stand-up", "Sci-Fi"],
+    poster: "/dist/assets/undefined_turn_this_into_a_mov.png",
+    isAdFree: true,
+    synopsis: "Join comedian Myke Wright on an out-of-this-world comedy adventure! In this hilarious stand-up special filmed in zero gravity, Myke delivers his signature wit and observational humor while floating through space. From alien encounters to the challenges of performing in a spacesuit, this comedy special takes laughter to new heights - literally!"
   }
 ];
 
 export const movieRails = [
   {
     title: "Trending Now",
-    movies: [mockMovies[6], mockMovies[1], mockMovies[0], mockMovies[4], mockMovies[2], mockMovies[5], mockMovies[3]] // Added Numb first
+    movies: [mockMovies[7], mockMovies[6], mockMovies[1], mockMovies[0], mockMovies[4], mockMovies[2], mockMovies[5], mockMovies[3]] // Myke Wright first, then Numb
   },
   {
     title: "Action & Thrillers", 
-    movies: [mockMovies[0], mockMovies[5], mockMovies[3], mockMovies[1], mockMovies[6]] // Added Numb
+    movies: [mockMovies[0], mockMovies[5], mockMovies[3], mockMovies[1], mockMovies[6]] // Numb included
   },
   {
     title: "Premium Ad-Free",
-    movies: mockMovies.filter(movie => movie.isAdFree) // Numb will be included automatically
+    movies: mockMovies.filter(movie => movie.isAdFree) // Both Numb and Myke Wright included automatically
   },
   {
     title: "Recently Added",
-    movies: [mockMovies[6], mockMovies[4], mockMovies[1], mockMovies[0], mockMovies[3]] // Numb as newest
+    movies: [mockMovies[7], mockMovies[6], mockMovies[4], mockMovies[1], mockMovies[0], mockMovies[3]] // Myke Wright and Numb as newest
   },
   {
     title: "Psychological Thrillers",
-    movies: [mockMovies[6], mockMovies[3]] // New rail featuring Numb
+    movies: [mockMovies[6], mockMovies[3]] // Numb featured
+  },
+  {
+    title: "Comedy Specials",
+    movies: [mockMovies[7]] // New rail featuring Myke Wright
   },
   {
     title: "Sci-Fi Collection",
-    movies: [mockMovies[1], mockMovies[5]]
+    movies: [mockMovies[1], mockMovies[5], mockMovies[7]] // Myke Wright added to Sci-Fi
   }
 ];
