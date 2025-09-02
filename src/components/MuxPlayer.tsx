@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import MuxPlayer from '@mux/mux-player-react';
 
 interface MuxPlayerProps {
@@ -27,24 +27,35 @@ const MuxPlayerComponent: React.FC<MuxPlayerProps> = ({
   viewerUserId = 'demo-user'
 }) => {
   const playerRef = useRef<HTMLVideoElement>(null);
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const player = playerRef.current;
-    if (!player) return;
+    if (!player || !isPlayerReady) return;
 
-    // Set start time if provided
-    if (startTime > 0) {
-      player.currentTime = startTime;
-    }
-
-    // Set autoplay if requested
-    if (autoplay) {
-      player.play().catch(console.error);
-    }
+    // Wait for player to be ready before setting start time or autoplay
+    const handleCanPlay = () => {
+      if (startTime > 0) {
+        player.currentTime = startTime;
+      }
+      
+      if (autoplay) {
+        // Use a small delay to ensure the player is fully ready
+        setTimeout(() => {
+          player.play().catch((error) => {
+            console.warn('Autoplay failed:', error);
+            // Don't treat autoplay failure as a critical error
+          });
+        }, 100);
+      }
+    };
 
     // Add event listeners
     const handleTimeUpdate = () => {
-      onTimeUpdate?.(player.currentTime, player.duration);
+      if (player.duration && !isNaN(player.duration)) {
+        onTimeUpdate?.(player.currentTime, player.duration);
+      }
     };
 
     const handleEnded = () => {
@@ -54,25 +65,53 @@ const MuxPlayerComponent: React.FC<MuxPlayerProps> = ({
     const handleError = (event: Event) => {
       const error = (event.target as HTMLVideoElement)?.error;
       console.error('Mux Player error:', error);
+      setHasError(true);
       onError?.(error);
     };
 
+    const handleLoadStart = () => {
+      setHasError(false);
+    };
+
+    player.addEventListener('canplay', handleCanPlay);
     player.addEventListener('timeupdate', handleTimeUpdate);
     player.addEventListener('ended', handleEnded);
     player.addEventListener('error', handleError);
+    player.addEventListener('loadstart', handleLoadStart);
 
     // Cleanup
     return () => {
+      player.removeEventListener('canplay', handleCanPlay);
       player.removeEventListener('timeupdate', handleTimeUpdate);
       player.removeEventListener('ended', handleEnded);
       player.removeEventListener('error', handleError);
+      player.removeEventListener('loadstart', handleLoadStart);
     };
-  }, [startTime, autoplay, onTimeUpdate, onEnded, onError]);
+  }, [startTime, autoplay, onTimeUpdate, onEnded, onError, isPlayerReady]);
 
-  // Construct the playback URL with token if provided
-  let playbackUrl = `https://stream.mux.com/${playbackId}.m3u8`;
-  if (playbackToken) {
-    playbackUrl += `?token=${playbackToken}`;
+  const handlePlayerReady = () => {
+    setIsPlayerReady(true);
+  };
+
+  if (hasError) {
+    return (
+      <div className={`relative bg-black rounded-lg overflow-hidden flex items-center justify-center ${className}`}>
+        <div className="text-center text-white p-8">
+          <div className="text-4xl mb-4">⚠️</div>
+          <h3 className="text-lg font-semibold mb-2">Video Error</h3>
+          <p className="text-gray-300 mb-4">There was an issue loading this video.</p>
+          <button 
+            onClick={() => {
+              setHasError(false);
+              setIsPlayerReady(false);
+            }}
+            className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -95,12 +134,15 @@ const MuxPlayerComponent: React.FC<MuxPlayerProps> = ({
         controls
         playsInline
         preload="metadata"
-        autoPlay={autoplay}
-        startTime={startTime}
+        autoPlay={false} // Let our custom logic handle autoplay
+        startTime={0} // Let our custom logic handle start time
+        onLoadedData={handlePlayerReady}
         style={{
           width: '100%',
           height: '100%',
         }}
+        // Add token as a prop if provided
+        {...(playbackToken && { playbackToken })}
       />
     </div>
   );
