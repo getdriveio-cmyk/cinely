@@ -12,6 +12,9 @@ import { initializeTracking } from "@/utils/tracking";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import MockLogin from "@/components/MockLogin";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import RouteErrorBoundary from "@/components/RouteErrorBoundary";
+import SkipNavigation from "@/components/SkipNavigation";
 
 
 // Lazy load pages for code splitting
@@ -42,51 +45,54 @@ const App = () => {
   }, []);
 
   return (
-  <HelmetProvider>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <OfflineIndicator />
-          <CookieBanner />
-          <BrowserRouter
-            future={{
-              v7_startTransition: true,
-              v7_relativeSplatPath: true,
-            }}
-          >
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/watch-free" element={<WatchFree />} />
-                <Route path="/movies" element={<Movies />} />
-                <Route path="/tv-shows" element={<TVShows />} />
-                <Route path="/originals" element={<Originals />} />
-                <Route path="/trending" element={<Trending />} />
-                <Route path="/help" element={<Help />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                
-                {/* Mock login route */}
-                <Route path="/login" element={<MockLogin />} />
-                
-                {/* Authenticated routes */}
-                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
-                <Route path="/watch/:slug" element={<ProtectedRoute><Watch /></ProtectedRoute>} />
-                <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-                
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </AuthProvider>
-  </HelmetProvider>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <OfflineIndicator />
+              <CookieBanner />
+              <BrowserRouter
+                future={{
+                  v7_startTransition: true,
+                  v7_relativeSplatPath: true,
+                }}
+              >
+                <SkipNavigation />
+                <Suspense fallback={<PageLoader />}>
+                  <Routes>
+                    <Route path="/" element={<RouteErrorBoundary routeName="Home"><Index /></RouteErrorBoundary>} />
+                    <Route path="/watch-free" element={<RouteErrorBoundary routeName="Watch Free"><WatchFree /></RouteErrorBoundary>} />
+                    <Route path="/movies" element={<RouteErrorBoundary routeName="Movies"><Movies /></RouteErrorBoundary>} />
+                    <Route path="/tv-shows" element={<RouteErrorBoundary routeName="TV Shows"><TVShows /></RouteErrorBoundary>} />
+                    <Route path="/originals" element={<RouteErrorBoundary routeName="Originals"><Originals /></RouteErrorBoundary>} />
+                    <Route path="/trending" element={<RouteErrorBoundary routeName="Trending"><Trending /></RouteErrorBoundary>} />
+                    <Route path="/help" element={<RouteErrorBoundary routeName="Help"><Help /></RouteErrorBoundary>} />
+                    <Route path="/contact" element={<RouteErrorBoundary routeName="Contact"><Contact /></RouteErrorBoundary>} />
+                    <Route path="/privacy" element={<RouteErrorBoundary routeName="Privacy"><Privacy /></RouteErrorBoundary>} />
+                    <Route path="/terms" element={<RouteErrorBoundary routeName="Terms"><Terms /></RouteErrorBoundary>} />
+                    
+                    {/* Mock login route */}
+                    <Route path="/login" element={<RouteErrorBoundary routeName="Login"><MockLogin /></RouteErrorBoundary>} />
+                    
+                    {/* Authenticated routes */}
+                    <Route path="/dashboard" element={<RouteErrorBoundary routeName="Dashboard"><ProtectedRoute><Dashboard /></ProtectedRoute></RouteErrorBoundary>} />
+                    <Route path="/onboarding" element={<RouteErrorBoundary routeName="Onboarding"><ProtectedRoute><Onboarding /></ProtectedRoute></RouteErrorBoundary>} />
+                    <Route path="/watch/:slug" element={<RouteErrorBoundary routeName="Watch"><ProtectedRoute><Watch /></ProtectedRoute></RouteErrorBoundary>} />
+                    <Route path="/account" element={<RouteErrorBoundary routeName="Account"><ProtectedRoute><Account /></ProtectedRoute></RouteErrorBoundary>} />
+                    
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<RouteErrorBoundary routeName="Not Found"><NotFound /></RouteErrorBoundary>} />
+                  </Routes>
+                </Suspense>
+              </BrowserRouter>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </AuthProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 };
 

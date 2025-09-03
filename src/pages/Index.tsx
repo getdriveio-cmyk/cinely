@@ -29,30 +29,34 @@ const Index = () => {
         ]}
         canonical="/"
         structuredData={[websiteStructuredData, organizationStructuredData]}
+        googleAdSense="ca-pub-8689420229072543"
       />
       
       {/* Header */}
       <Header />
 
+      {/* Main Content */}
+      <main id="main-content" role="main" aria-label="Main content">
+        {/* Hero Section */}
+        <section aria-label="Featured content">
+          <HeroBanner />
+        </section>
 
-
-      {/* Hero Section */}
-      <HeroBanner />
-
-      {/* Movie Rails */}
-      <div className="relative z-10 -mt-32">
-        {movieRails.map((rail, index) => (
-          <MovieRail 
-            key={index}
-            title={rail.title}
-            movies={rail.movies}
-            size={index === 0 ? "lg" : "md"}
-          />
-        ))}
-      </div>
+        {/* Movie Rails */}
+        <section className="relative z-10 -mt-32" aria-label="Movie collections">
+          {movieRails.map((rail, index) => (
+            <MovieRail 
+              key={index}
+              title={rail.title}
+              movies={rail.movies}
+              size={index === 0 ? "lg" : "md"}
+            />
+          ))}
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-card/50 border-t border-border mt-16">
+      <footer id="footer" className="bg-card/50 border-t border-border mt-16" role="contentinfo" aria-label="Site footer">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Logo & Description */}

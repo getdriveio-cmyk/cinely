@@ -18,6 +18,7 @@ interface SEOProps {
   tags?: string[];
   locale?: string;
   alternateLocales?: string[];
+  googleAdSense?: string;
 }
 
 const SEO = ({
@@ -37,7 +38,8 @@ const SEO = ({
   section,
   tags = [],
   locale = "en_US",
-  alternateLocales = []
+  alternateLocales = [],
+  googleAdSense
 }: SEOProps) => {
   const fullTitle = title.includes("Cinely") ? title : `${title} | Cinely`;
   const siteUrl = "https://cinely.vercel.app";
@@ -118,6 +120,9 @@ const SEO = ({
       <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
       <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
       <meta name="referrer" content="strict-origin-when-cross-origin" />
+      
+      {/* Google AdSense */}
+      {googleAdSense && <meta name="google-adsense-account" content={googleAdSense} />}
       
       {/* Structured Data */}
       {structuredData && (
